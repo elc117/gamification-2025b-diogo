@@ -4,8 +4,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'org.gretty:gretty:3.1.5'
-    classpath "org.docstr:gwt-gradle-plugin:$gwtPluginVersion"
+    classpath 'org.gretty:gretty:3.1.0'
   }
 }
 apply plugin: "gwt"
@@ -17,11 +16,10 @@ gwt {
   maxHeapSize = '1G' // Default 256m is not enough for the GWT compiler. GWT is HUNGRY.
   minHeapSize = '1G'
 
-  // Needs to be in front of "modules" below.
-  src = files(file('src/main/java'), project(":core").file('src/main/java'))
-  modules += ["com.gamification.game.GdxDefinition"]
-  devModules += ["com.gamification.game.GdxDefinitionSuperdev"]
-  project.webAppDirName = "webapp"
+  src = files(file('src/main/java')) // Needs to be in front of "modules" below.
+  modules 'com.badlogic.drop.GdxDefinition'
+  devModules 'com.badlogic.drop.GdxDefinitionSuperdev'
+  project.webAppDirName = 'webapp'
 
   compiler.strict = true
   compiler.disableCastChecking = true
@@ -49,8 +47,7 @@ gretty.resourceBase = "${project.layout.buildDirectory.asFile.get().absolutePath
 gretty.contextPath = "/"
 gretty.portPropertiesFileName = "TEMP_PORTS.properties"
 
-tasks.register('startHttpServer') {
-  dependsOn("draftCompileGwt")
+task startHttpServer (dependsOn: [draftCompileGwt]) {
   doFirst {
     copy {
       from "webapp"
@@ -62,21 +59,19 @@ tasks.register('startHttpServer') {
     }
   }
 }
-
-tasks.register('beforeRun', AppBeforeIntegrationTestTask) {
-  dependsOn("startHttpServer")
-  gretty {
-    integrationTestTask("superDev")
-  }
+task beforeRun(type: AppBeforeIntegrationTestTask, dependsOn: startHttpServer) {
   // The next line allows ports to be reused instead of
   // needing a process to be manually terminated.
   file("build/TEMP_PORTS.properties").delete()
-  interactive = false
+  // Somewhat of a hack; uses Gretty's support for wrapping a task in
+  // a start and then stop of a Jetty server that serves files while
+  // also running the SuperDev code server.
+  integrationTestTask 'superDev'
+
+  interactive false
 }
 
-tasks.register('superDev', GwtSuperDev) {
-  group("gwt")
-  dependsOn("beforeRun")
+task superDev(type: GwtSuperDev) {
   doFirst {
     gwt.modules = gwt.devModules
   }
@@ -91,8 +86,7 @@ clean.delete += [file("war")]
 // This is relative to the html/ folder.
 var outputPath = "build/dist/"
 
-tasks.register('dist') {
-  dependsOn(["clean", "compileGwt"])
+task dist(dependsOn: [clean, compileGwt]) {
   doLast {
     // Uncomment the next line if you have changed outputPath and know that its contents
     // should be replaced by a new dist build. Some large JS files are not cleaned up by
@@ -103,7 +97,7 @@ tasks.register('dist') {
 
     file(outputPath).mkdirs()
     copy {
-      from("build/gwt/out") {
+      from("build/gwt/out"){
         exclude '**/*.symbolMap' // Not used by a dist, and these can be large.
       }
       into outputPath
@@ -114,7 +108,7 @@ tasks.register('dist') {
         exclude 'refresh.png' // We don't need this button; this saves some bytes.
       }
       into outputPath
-    }
+      }
     copy {
       from("webapp") {
         // These next two lines take the index.html page and remove the superdev refresh button.
@@ -125,7 +119,7 @@ tasks.register('dist') {
         // either remove or comment out only the "filter" line above this.
       }
       into outputPath
-    }
+      }
     copy {
       from "war"
       into outputPath
@@ -133,28 +127,25 @@ tasks.register('dist') {
   }
 }
 
-tasks.register('addSource') {
+task addSource {
   doLast {
     sourceSets.main.compileClasspath += files(project(':core').sourceSets.main.allJava.srcDirs)
     sourceSets.main.compileClasspath += files("../core/build/generated/sources/annotationProcessor/java/main")
-    sourceSets.main.compileClasspath += files(sourceSets.main.output.resourcesDir)
 
   }
 }
 
-tasks.register("distZip", Zip) {
-  dependsOn("dist")
+task distZip(type: Zip, dependsOn: dist){
   //// This uses the output of the dist task, which removes the superdev button from index.html .
   from(outputPath)
-  archiveVersion = projectVersion
   archiveBaseName.set("${appName}-dist")
   //// The result will be in html/build/ with a name containing "-dist".
   destinationDirectory.set(file("build"))
 }
 
-tasks.compileGwt.dependsOn("addSource")
-tasks.draftCompileGwt.dependsOn("addSource")
-tasks.checkGwt.dependsOn("addSource")
+tasks.compileGwt.dependsOn(addSource)
+tasks.draftCompileGwt.dependsOn(addSource)
+tasks.checkGwt.dependsOn(addSource)
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
