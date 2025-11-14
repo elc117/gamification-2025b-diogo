@@ -1,0 +1,2 @@
+libgdx.png
+sky_background1.jpg
