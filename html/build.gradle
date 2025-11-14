@@ -17,8 +17,8 @@ gwt {
   minHeapSize = '1G'
 
   src = files(file('src/main/java')) // Needs to be in front of "modules" below.
-  modules 'com.badlogic.drop.GdxDefinition'
-  devModules 'com.badlogic.drop.GdxDefinitionSuperdev'
+  modules 'com.gamification.game.GdxDefinition'
+  devModules 'com.gamification.game.GdxDefinitionSuperdev'
   project.webAppDirName = 'webapp'
 
   compiler.strict = true

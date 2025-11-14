@@ -13,7 +13,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        background = new Texture("sky_background1.png");
+        background = new Texture("sky_background1.jpg");
     }
 
     @Override
