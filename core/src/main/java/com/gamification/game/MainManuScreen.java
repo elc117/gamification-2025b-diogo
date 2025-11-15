@@ -4,13 +4,14 @@ import com.badlogic.gdx.Screen;
 
 public class MainManuScreen implements Screen {
     final Main game;
-
+    /* 
     Texture playButtonActive;
     Texture playButtonInactive;
     Texture instructionsButtonActive;
     Texture instructionsButtonInactive;
     Texture creditsButtonActive;
     Texture creditsButtonInactive;
+    */
 
     public MainManuScreen(Main game) {
         this.game = game;

@@ -1,7 +1,15 @@
 d:assets:assets:0:application/unknown:1
+i:question4.png:question4-6c6099d289aa3288feeab72c11d335e4.png:450557:image/png:1
+i:question3.png:question3-16c24a8b363cc16ac33f814a45cf6e08.png:454723:image/png:1
+i:question2.png:question2-c561fd37687ab64f378723a676e1b7bf.png:363056:image/png:1
 i:libgdx.png:libgdx-6ce2ac53bc1738a1e5ac95f05dceb4a5.png:2456:image/png:1
-t:assets.txt:assets-1a62c69a4a69b0df970d993d46ad9d01.txt:31:text/plain:1
-i:sky_background1.jpg:sky_background1-f820419d6285974fc48e1354b8b4653a.jpg:32184:image/jpeg:1
+t:assets.txt:assets-e0aabe4d9bf49c79c061c0ee802bb1f6.txt:121:text/plain:1
+i:andaime.png:andaime-7d8054094ef02d51f4fce3b40b5b6b52.png:3140:image/png:1
+i:question1.png:question1-a63eafaac98dfc5fc7188da92e322910.png:457384:image/png:1
+i:bg.png:bg-c495cdc807aef578cc56f133ed02c468.png:5884:image/png:1
+i:char.png:char-8d69808948ae1beb628846fe91373a83.png:1457:image/png:1
+i:plataforma.png:plataforma-c590a0a5593f6a5545c2d17b2f0bb4aa.png:171:image/png:1
+i:parede.png:parede-28bbb01e0ac65066eb45dc5819d7baf1.png:1732:image/png:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:particles.vertex-f25b8b2fae10b9bfa09bfdd484923148.glsl:2886:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:default.fragment-e1c018bd48044c8b67c7bbc53145e540.glsl:5874:application/unknown:1
