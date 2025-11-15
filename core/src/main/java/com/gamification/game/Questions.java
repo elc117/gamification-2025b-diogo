@@ -1,14 +1,19 @@
 package com.gamification.game;
 
 public class Questions {
-    private String question;
-    private String[] answers;
-    private int true_answer; 
+    private Texture[] questions;
+    private boolean correctAnswer;
+    private int questionIndex;
+    private Main game;
+    private player player;
+    private Vector2 position; 
+    private float xAnswer, yAnswer, widthAnswer, heightAnswer;
+    private float[][] incorrectAnswers;
 
-    public Questions(String q, String[] a, int t){
-        question = q;
-        answers = a;
-        true_answer = t;
+    public Questions(int questionIndex, Main game, player player){
+        this.questionIndex = questionIndex;
+        this.game = game;
+        this.player = player;
     } 
 
     public String getQuention(){
