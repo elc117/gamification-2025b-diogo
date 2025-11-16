@@ -29,10 +29,10 @@ public class Main extends ApplicationAdapter {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         batch.begin();
         batch.draw(background, 0, 0);
-        batch.draw(character, 50, 100);
-        batch.draw(parede, 300, 0);
-        batch.draw(plataforma, 200, 150);
-        batch.draw(andaime, 400, 50);
+        batch.draw(parede, 0, 0);
+        batch.draw(andaime, 20, 0);
+        batch.draw(plataforma, 20, 0);
+        batch.draw(character, 30, 05); 
         batch.end();
     }
 

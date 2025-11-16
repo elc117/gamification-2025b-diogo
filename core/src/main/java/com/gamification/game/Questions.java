@@ -8,16 +8,28 @@ public class Questions {
     private boolean correctAnswer;
     private int questionIndex;
     private Main game;
-    // private player player; // TODO: Criar classe Player
+    private Player player; 
     private Vector2 position; 
     private float xAnswer, yAnswer, widthAnswer, heightAnswer;
     private float[][] incorrectAnswers;
 
-    public Questions(int questionIndex, Main game /*, player player*/){
+    public Questions(int questionIndex, Main game, Player player){
         this.questionIndex = questionIndex;
         this.game = game;
-        // this.player = player;
+        this.player = player;
+
+
+        questions = new Texture[]{
+            new Texture("question1.png"),
+            new Texture("question2.png"),
+            new Texture("question3.png"),
+            new Texture("question4.png")
+        };  
+
+        
     } 
+
+
 
   
 }
