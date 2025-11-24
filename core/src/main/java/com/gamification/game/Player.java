@@ -21,7 +21,7 @@ public class Player {
         if (lives > 1) {
             lives--;
         }else{
-            game.over();
+            //game.over();
         }
         
     }
