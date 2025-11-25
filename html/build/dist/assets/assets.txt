@@ -1,11 +1,11 @@
 d:assets:assets:0:application/unknown:1
-i:question4.png:question4-6c6099d289aa3288feeab72c11d335e4.png:450557:image/png:1
-i:question3.png:question3-16c24a8b363cc16ac33f814a45cf6e08.png:454723:image/png:1
-i:question2.png:question2-c561fd37687ab64f378723a676e1b7bf.png:363056:image/png:1
+i:question4.png:question4-31802d2f7016fed44e3aaf4110357ba3.png:10600:image/png:1
+i:question3.png:question3-4fa200285ab5111f2977cbf2042dd266.png:11085:image/png:1
+i:question2.png:question2-e586025758ffa54a9a0ed19c94cccec9.png:7343:image/png:1
 i:libgdx.png:libgdx-6ce2ac53bc1738a1e5ac95f05dceb4a5.png:2456:image/png:1
 t:assets.txt:assets-e0aabe4d9bf49c79c061c0ee802bb1f6.txt:121:text/plain:1
 i:andaime.png:andaime-7d8054094ef02d51f4fce3b40b5b6b52.png:3140:image/png:1
-i:question1.png:question1-a63eafaac98dfc5fc7188da92e322910.png:457384:image/png:1
+i:question1.png:question1-6b7c67a6134edea80d74115db11175b4.png:10041:image/png:1
 i:bg.png:bg-c495cdc807aef578cc56f133ed02c468.png:5884:image/png:1
 i:char.png:char-8d69808948ae1beb628846fe91373a83.png:1457:image/png:1
 i:plataforma.png:plataforma-c590a0a5593f6a5545c2d17b2f0bb4aa.png:171:image/png:1

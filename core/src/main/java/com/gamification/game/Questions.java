@@ -31,47 +31,54 @@ public class Questions {
         };  
 
         currentQuestion = questions[questionIndex];
+        
+        float baseX = 330;
+        float baseY = 40;
+        
         if(questionIndex == 0){
-            xAnswer = 150;
-            yAnswer = 100;
-            widthAnswer = 100;
-            heightAnswer = 50;
+            xAnswer = baseX + 20;
+            yAnswer = baseY + 60;
+            widthAnswer = 120;
+            heightAnswer = 30;
 
             incorrectAnswers = new float[][]{
-                {300, 100, 100, 50},
-                {450, 100, 100, 50},
-                {600, 100, 100, 50}
+                {baseX + 20, baseY + 20, 120, 30},
+                {baseX + 160, baseY + 60, 120, 30},
+                {baseX + 160, baseY + 20, 120, 30}
             }; 
         }else if(questionIndex == 1){
-                xAnswer = 200;
-                yAnswer = 120;      
-                widthAnswer = 120;
-                heightAnswer = 60;
-                incorrectAnswers = new float[][]{
-                    {350, 120, 120, 60},
-                    {500, 120, 120, 60},
-                    {650, 120, 120, 60}
-                };
+            xAnswer = baseX + 20;
+            yAnswer = baseY + 60;
+            widthAnswer = 120;
+            heightAnswer = 30;
+            
+            incorrectAnswers = new float[][]{
+                {baseX + 20, baseY + 20, 120, 30},
+                {baseX + 160, baseY + 60, 120, 30},
+                {baseX + 160, baseY + 20, 120, 30}
+            };
         }else if(questionIndex == 2){
-                xAnswer = 250;
-                yAnswer = 140;      
-                widthAnswer = 130;
-                heightAnswer = 70;
-                incorrectAnswers = new float[][]{
-                    {400, 140, 130, 70},
-                    {550, 140, 130, 70},
-                    {700, 140, 130, 70}
-                };
+            xAnswer = baseX + 20;
+            yAnswer = baseY + 60;
+            widthAnswer = 120;
+            heightAnswer = 30;
+            
+            incorrectAnswers = new float[][]{
+                {baseX + 20, baseY + 20, 120, 30},
+                {baseX + 160, baseY + 60, 120, 30},
+                {baseX + 160, baseY + 20, 120, 30}
+            };
         }else if(questionIndex == 3){
-                xAnswer = 300;  
-                yAnswer = 160;      
-                widthAnswer = 140;  
-                heightAnswer = 80;
-                incorrectAnswers = new float[][]{
-                    {450, 160, 140, 80},
-                    {600, 160, 140, 80},
-                    {750, 160, 140, 80}
-                };
+            xAnswer = baseX + 20;
+            yAnswer = baseY + 60;
+            widthAnswer = 120;
+            heightAnswer = 30;
+            
+            incorrectAnswers = new float[][]{
+                {baseX + 20, baseY + 20, 120, 30},
+                {baseX + 160, baseY + 60, 120, 30},
+                {baseX + 160, baseY + 20, 120, 30}
+            };
         }
     }
 
@@ -85,13 +92,11 @@ public class Questions {
             return false;
         }
 
-        // Verifica se clicou na resposta correta
         if(isInside(clickPosition, xAnswer, yAnswer, widthAnswer, heightAnswer)){
             answered = true;
             return true;
         }
 
-        // Verifica se clicou em alguma resposta incorreta
         for(float[] incorrectAnswer : incorrectAnswers){
             if(isInside(clickPosition, incorrectAnswer[0], incorrectAnswer[1], 
                        incorrectAnswer[2], incorrectAnswer[3])){
@@ -113,8 +118,16 @@ public class Questions {
 
     public void render(){
         game.getBatch().begin();
-        game.getBatch().draw(currentQuestion, 100, 200);
+        renderInBatch();
         game.getBatch().end();
+    }
+    
+    public void renderInBatch(){
+        float questionX = 330;
+        float questionY = 40;
+        float questionWidth = 300;
+        float questionHeight = 400;
+        game.getBatch().draw(currentQuestion, questionX, questionY, questionWidth, questionHeight);
     }
 
     public void dispose(){
