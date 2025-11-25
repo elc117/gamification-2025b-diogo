@@ -1,6 +1,7 @@
 package com.gamification.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.Vector2;
 
 public class Questions {
@@ -28,58 +29,32 @@ public class Questions {
             new Texture("question2.png"),
             new Texture("question3.png"),
             new Texture("question4.png")
-        };  
+        };
+        
+        // Configurar filtros para melhor qualidade ao redimensionar
+        for(Texture question : questions){
+            question.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        }
 
         currentQuestion = questions[questionIndex];
         
-        float baseX = 330;
+        // Posições ajustadas para questões maiores e centralizadas
+        float baseX = 280;
         float baseY = 40;
         
-        if(questionIndex == 0){
-            xAnswer = baseX + 20;
-            yAnswer = baseY + 60;
-            widthAnswer = 120;
-            heightAnswer = 30;
+        // Ajustar posições das respostas (assumindo 4 opções em 2x2)
+        // Resposta correta sempre na posição superior esquerda
+        xAnswer = baseX + 40;
+        yAnswer = baseY + 300;
+        widthAnswer = 140;
+        heightAnswer = 55;
 
-            incorrectAnswers = new float[][]{
-                {baseX + 20, baseY + 20, 120, 30},
-                {baseX + 160, baseY + 60, 120, 30},
-                {baseX + 160, baseY + 20, 120, 30}
-            }; 
-        }else if(questionIndex == 1){
-            xAnswer = baseX + 20;
-            yAnswer = baseY + 60;
-            widthAnswer = 120;
-            heightAnswer = 30;
-            
-            incorrectAnswers = new float[][]{
-                {baseX + 20, baseY + 20, 120, 30},
-                {baseX + 160, baseY + 60, 120, 30},
-                {baseX + 160, baseY + 20, 120, 30}
-            };
-        }else if(questionIndex == 2){
-            xAnswer = baseX + 20;
-            yAnswer = baseY + 60;
-            widthAnswer = 120;
-            heightAnswer = 30;
-            
-            incorrectAnswers = new float[][]{
-                {baseX + 20, baseY + 20, 120, 30},
-                {baseX + 160, baseY + 60, 120, 30},
-                {baseX + 160, baseY + 20, 120, 30}
-            };
-        }else if(questionIndex == 3){
-            xAnswer = baseX + 20;
-            yAnswer = baseY + 60;
-            widthAnswer = 120;
-            heightAnswer = 30;
-            
-            incorrectAnswers = new float[][]{
-                {baseX + 20, baseY + 20, 120, 30},
-                {baseX + 160, baseY + 60, 120, 30},
-                {baseX + 160, baseY + 20, 120, 30}
-            };
-        }
+        // Respostas incorretas: superior direita, inferior esquerda, inferior direita
+        incorrectAnswers = new float[][]{
+            {baseX + 190, baseY + 300, 140, 55},  // Superior direita
+            {baseX + 40, baseY + 235, 140, 55},   // Inferior esquerda
+            {baseX + 190, baseY + 235, 140, 55}   // Inferior direita
+        };
     }
 
     private boolean isInside(Vector2 position, float x, float y, float width, float height){
@@ -123,9 +98,10 @@ public class Questions {
     }
     
     public void renderInBatch(){
-        float questionX = 330;
+        // Centralizar melhor e aumentar tamanho
+        float questionX = 280;
         float questionY = 40;
-        float questionWidth = 300;
+        float questionWidth = 360;
         float questionHeight = 400;
         game.getBatch().draw(currentQuestion, questionX, questionY, questionWidth, questionHeight);
     }

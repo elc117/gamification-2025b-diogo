@@ -20,8 +20,8 @@ public class MainMenuScreen implements Screen {
     public void show() {
         background = new Texture("bg.png");
         // Temporariamente usando imagens existentes até criar os botões
-        playButtonActive = new Texture("plataforma.png");
-        playButtonInactive = new Texture("plataforma.png");
+        playButtonActive = new Texture("play.png");
+        playButtonInactive = new Texture("play.png");
         playButtonHovered = false;
     }
 

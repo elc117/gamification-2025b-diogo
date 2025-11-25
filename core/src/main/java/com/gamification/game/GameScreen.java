@@ -106,15 +106,17 @@ public class GameScreen implements Screen {
                     }
                 }
                 
-                // Avançar para próxima pergunta
-                if (!gameOver && currentQuestionIndex < 3) {
-                    currentQuestionIndex++;
-                    currentQuestion.dispose();
-                    currentQuestion = new Questions(currentQuestionIndex, game, player);
-                } else if (!gameOver) {
-                    // Jogador completou todas as perguntas
-                    game.setScreen(new MainMenuScreen(game));
-                    dispose();
+                // Avançar para próxima pergunta (questões 0, 1, 2, 3)
+                if (!gameOver) {
+                    if (currentQuestionIndex < 3) {
+                        currentQuestionIndex++;
+                        currentQuestion.dispose();
+                        currentQuestion = new Questions(currentQuestionIndex, game, player);
+                    } else {
+                        // Completou a 4ª questão (índice 3), finalizar
+                        game.setScreen(new MainMenuScreen(game));
+                        dispose();
+                    }
                 }
             }
         }
