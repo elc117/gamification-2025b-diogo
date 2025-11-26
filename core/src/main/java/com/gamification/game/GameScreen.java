@@ -24,6 +24,13 @@ public class GameScreen implements Screen {
     private float plataformaY;
     private float andaimeY;
     private boolean gameOver;
+    
+    // Variáveis para animação de subida
+    private boolean isMovingUp;
+    private float targetY;
+    private float targetPlataformaY;
+    private float targetAndaimeY;
+    private float moveSpeed = 100f; 
 
     public GameScreen(Main game) {
         this.game = game;
@@ -33,6 +40,10 @@ public class GameScreen implements Screen {
         this.plataformaY = 0;
         this.andaimeY = 0;
         this.gameOver = false;
+        this.isMovingUp = false;
+        this.targetY = 5;
+        this.targetPlataformaY = 0;
+        this.targetAndaimeY = 0;
     }
 
     @Override
@@ -53,12 +64,27 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (gameOver) {
-            renderGameOver();
-            return;
-        }
-        
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        
+        // Atualizar animação de subida
+        if (isMovingUp) {
+            float moveAmount = moveSpeed * delta;
+            
+            // Mover personagem
+            if (characterY < targetY) {
+                characterY = Math.min(characterY + moveAmount, targetY);
+            }
+            
+            // Mover plataforma
+            if (plataformaY < targetPlataformaY) {
+                plataformaY = Math.min(plataformaY + moveAmount, targetPlataformaY);
+            }
+            
+            // Verificar se chegou ao destino
+            if (characterY >= targetY && plataformaY >= targetPlataformaY && andaimeY >= targetAndaimeY) {
+                isMovingUp = false;
+            }
+        }
         
         // Processar input
         handleInput();
@@ -92,17 +118,19 @@ public class GameScreen implements Screen {
             
             if (currentQuestion.isAnswered()) {
                 if (correct) {
-                    // Resposta correta: mover personagem e plataformas para cima
-                    float moveUp = 100f; // Subir 100 pixels
-                    characterY += moveUp;
-                    plataformaY += moveUp;
-                    andaimeY += moveUp;
-                    
-                    System.out.println("Subindo! Character Y: " + characterY + ", Plataforma Y: " + plataformaY + ", Andaime Y: " + andaimeY);
+                    // Resposta correta: iniciar animação de subida
+                    float moveUp = 10f; // Subir 10 pixels
+                    targetY = characterY + moveUp;
+                    targetPlataformaY = plataformaY + moveUp;
+                    isMovingUp = true;
+                                        
                 } else {
                     player.loseLife();
                     if (player.getLives() <= 0) {
                         gameOver = true;
+                        game.setScreen(new GameOverScreen(game));
+                        dispose();
+                        return;
                     }
                 }
                 
@@ -141,19 +169,6 @@ public class GameScreen implements Screen {
         // Manter personagem dentro da área do jogo (lado esquerdo, 320px de largura)
         characterX = Math.max(0, Math.min(characterX, 300 - 64));
         characterY = Math.max(0, Math.min(characterY, 480 - 64));
-    }
-
-    private void renderGameOver() {
-        ScreenUtils.clear(0.2f, 0.0f, 0.0f, 1f);
-        
-        // Aqui você pode adicionar texto "Game Over" quando tiver uma fonte
-        // Por enquanto, apenas tela vermelha
-        
-        // Voltar ao menu após 3 segundos ou ao clicar
-        if (Gdx.input.justTouched()) {
-            game.setScreen(new MainMenuScreen(game));
-            dispose();
-        }
     }
 
     @Override

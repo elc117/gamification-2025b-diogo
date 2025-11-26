@@ -3,6 +3,7 @@ package com.gamification.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
@@ -19,9 +20,14 @@ public class MainMenuScreen implements Screen {
     @Override
     public void show() {
         background = new Texture("bg.png");
-        // Temporariamente usando imagens existentes até criar os botões
         playButtonActive = new Texture("play.png");
         playButtonInactive = new Texture("play.png");
+        
+        // Configurar filtros para melhor qualidade
+        background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        playButtonActive.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        playButtonInactive.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        
         playButtonHovered = false;
     }
 
@@ -30,24 +36,27 @@ public class MainMenuScreen implements Screen {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         
         game.getBatch().begin();
-        game.getBatch().draw(background, 0, 0);
+        game.getBatch().draw(background, 0, 0, 640, 480);
         
         // Desenhar botão Play no centro da tela
-        float buttonX = Gdx.graphics.getWidth() / 2f - 100;
-        float buttonY = Gdx.graphics.getHeight() / 2f - 25;
-        
         Texture currentButton = playButtonHovered ? playButtonActive : playButtonInactive;
-        game.getBatch().draw(currentButton, buttonX, buttonY, 200, 50);
+        float scale = 0.5f; // Reduzir para metade do tamanho
+        float buttonWidth = currentButton.getWidth() * scale;
+        float buttonHeight = currentButton.getHeight() * scale;
+        float buttonX = (640 - buttonWidth) / 2f;
+        float buttonY = (480 - buttonHeight) / 2f;
+        
+        game.getBatch().draw(currentButton, buttonX, buttonY, buttonWidth, buttonHeight);
         
         game.getBatch().end();
         
         // Verificar clique no botão
         if (Gdx.input.justTouched()) {
             float touchX = Gdx.input.getX();
-            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            float touchY = 480 - Gdx.input.getY(); // Ajustar coordenadas Y
             
-            if (touchX >= buttonX && touchX <= buttonX + 200 &&
-                touchY >= buttonY && touchY <= buttonY + 50) {
+            if (touchX >= buttonX && touchX <= buttonX + buttonWidth &&
+                touchY >= buttonY && touchY <= buttonY + buttonHeight) {
                 game.setScreen(new GameScreen(game));
                 dispose();
             }

@@ -38,11 +38,10 @@ public class Questions {
 
         currentQuestion = questions[questionIndex];
         
-        // Posições ajustadas para questões maiores e centralizadas
+        // Posições para questões
         float baseX = 280;
         float baseY = 40;
         
-        // Ajustar posições das respostas (assumindo 4 opções em 2x2)
         // Resposta correta sempre na posição superior esquerda
         xAnswer = baseX + 40;
         yAnswer = baseY + 300;
