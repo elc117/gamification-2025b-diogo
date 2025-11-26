@@ -37,23 +37,6 @@ public class Questions {
         }
 
         currentQuestion = questions[questionIndex];
-        
-        // Posições para questões
-        float baseX = 280;
-        float baseY = 40;
-        
-        // Resposta correta sempre na posição superior esquerda
-        xAnswer = baseX + 40;
-        yAnswer = baseY + 300;
-        widthAnswer = 140;
-        heightAnswer = 55;
-
-        // Respostas incorretas: superior direita, inferior esquerda, inferior direita
-        incorrectAnswers = new float[][]{
-            {baseX + 190, baseY + 300, 140, 55},  // Superior direita
-            {baseX + 40, baseY + 235, 140, 55},   // Inferior esquerda
-            {baseX + 190, baseY + 235, 140, 55}   // Inferior direita
-        };
     }
 
     private boolean isInside(Vector2 position, float x, float y, float width, float height){
@@ -66,6 +49,42 @@ public class Questions {
             return false;
         }
 
+        float baseX = 280;
+        float baseY = 40;
+
+        if(questionIndex == 0){
+            xAnswer = baseX;
+            yAnswer = baseY + 55;
+            widthAnswer = 180;
+            heightAnswer = 55;
+            
+            incorrectAnswers = new float[][]{
+                {baseX, baseY, 180, 55},   
+                {baseX, baseY + 110, 180, 55},              
+                {baseX, baseY + 165, 180, 55}         
+            };
+        }else if(questionIndex == 1){
+            xAnswer = baseX;
+            yAnswer = baseY + 110;
+            widthAnswer = 180;
+            heightAnswer = 55;
+            
+            incorrectAnswers = new float[][]{
+                {baseX, baseY, 180, 55} 
+            };
+        }else if(questionIndex >= 2){
+            xAnswer = baseX;
+            yAnswer = baseY + 110;
+            widthAnswer = 180;
+            heightAnswer = 55;
+            
+            incorrectAnswers = new float[][]{
+                {baseX, baseY, 180, 55},  
+                {baseX, baseY + 55, 180, 55},         
+                {baseX, baseY + 165, 180, 55} 
+            };
+        }
+        
         if(isInside(clickPosition, xAnswer, yAnswer, widthAnswer, heightAnswer)){
             answered = true;
             return true;
@@ -85,6 +104,10 @@ public class Questions {
     public boolean isAnswered(){
         return answered;
     }
+    
+    public void resetAnswer(){
+        answered = false;
+    }
 
     public int getQuestionIndex(){
         return questionIndex;
@@ -97,10 +120,11 @@ public class Questions {
     }
     
     public void renderInBatch(){
-        // Centralizar melhor e aumentar tamanho
-        float questionX = 280;
+        // Desenhar pergunta no lado direito da tela (área azul)
+        // Tela: 640x480, lado esquerdo: 320px, lado direito: 320px
+        float questionX = 330;
         float questionY = 40;
-        float questionWidth = 360;
+        float questionWidth = 300;
         float questionHeight = 400;
         game.getBatch().draw(currentQuestion, questionX, questionY, questionWidth, questionHeight);
     }

@@ -101,7 +101,7 @@ public class GameScreen implements Screen {
         game.getBatch().draw(plataforma, 20, plataformaY);
         game.getBatch().draw(character, characterX, characterY);
         
-        // Renderizar pergunta (se houver)
+        // Renderizar pergunta
         if (currentQuestion != null && !currentQuestion.isAnswered()) {
             currentQuestion.renderInBatch();
         }
@@ -118,32 +118,34 @@ public class GameScreen implements Screen {
             
             if (currentQuestion.isAnswered()) {
                 if (correct) {
-                    // Resposta correta: iniciar animação de subida
-                    float moveUp = 10f; // Subir 10 pixels
+                    // Resposta correta: iniciar animação de subida e avançar
+                    float moveUp = 20f; // Subir 20 pixels
                     targetY = characterY + moveUp;
                     targetPlataformaY = plataformaY + moveUp;
                     isMovingUp = true;
-                                        
-                } else {
-                    player.loseLife();
-                    if (player.getLives() <= 0) {
-                        gameOver = true;
-                        game.setScreen(new GameOverScreen(game));
-                        dispose();
-                        return;
-                    }
-                }
-                
-                // Avançar para próxima pergunta (questões 0, 1, 2, 3)
-                if (!gameOver) {
+                    
+                    // Avançar para próxima pergunta (questões 0, 1, 2, 3)
                     if (currentQuestionIndex < 3) {
                         currentQuestionIndex++;
                         currentQuestion.dispose();
                         currentQuestion = new Questions(currentQuestionIndex, game, player);
                     } else {
-                        // Completou a 4ª questão (índice 3), finalizar
-                        game.setScreen(new MainMenuScreen(game));
+                        // Completou a 4ª questão (índice 3) - VITÓRIA!
+                        game.setScreen(new VictoryScreen(game));
                         dispose();
+                    }
+                } else {
+                    // Resposta errada: perde vida mas mantém na mesma questão
+                    player.loseLife();
+                    
+                    // Resetar a questão para permitir nova tentativa
+                    currentQuestion.resetAnswer();
+                    
+                    if (player.getLives() <= 0) {
+                        gameOver = true;
+                        game.setScreen(new GameOverScreen(game));
+                        dispose();
+                        return;
                     }
                 }
             }
