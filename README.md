@@ -26,9 +26,28 @@ Este projeto ainda está incompleto, no início sugeri fazer um sistema de score
 
 ### Diagrama de classes
 
+<img width="1676" height="1603" alt="Diagrama" src="https://github.com/user-attachments/assets/b7665651-795d-41bb-848f-19ded0188e4b" />
+
 ### Orientações para execução
+
+Não foi necessário usar extenções, somente abrir o codespaces e usar os comandos
+
+   1. Build the HTML project
+   ```
+   ./gradlew html:dist
+   ```
+   2. Run the HTML project
+   ```
+   cd html/build/dist
+   python -m http.server
+   ```
 
 ### Resultado final
 
+![2025-11-10-23-42-31](https://github.com/user-attachments/assets/46466801-483b-463a-9851-a76fc8ea1147)
+
+          
 ### Referências e créditos
+[Aya Adventures](https://github.com/elc117/game-2024b-ayaadventures/tree/main)
+[Exemplo em aula](https://github.com/AndreaInfUFSM/java-libgdx-extended-drop-example/tree/master)
 
