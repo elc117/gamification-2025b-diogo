@@ -1,36 +1,34 @@
-#  gamification-2025b-diogo
+### Identificação
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+Nome: Diogo Dalbianco dos Santos 
+Curso: Sistemas de Informação
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+### Proposta
 
-## Platforms
+Fazer um quiz educativo para treinamentos da NR 35, essa norma regulamenta os requisitos mínimos de segurança para trabalho em altura, a ideia é fazer uma sequencia de perguntas para o usuário, fazer um score com as respostas certas, mostrar as resoluções das perguntas e se o usuário seria aprovado pelo treinamento(baseado no score).
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
-- `html`: Web platform using GWT and WebGL. Supports only Java projects.
+### Processo de desenvolvimento
 
-## Gradle
+No início do processo tive vários problemas com o gradle e o codespaces, pois configurei o .devcontainer diretamente pelo codespaces o que ocasionou em vários erros(porque eu não sabia como configurar corretamente), mas um tempo depois consegui configurar essa parte certa, mas a versão do gradle ainda estava dando problema, então tentei voltar para versões anteriores, e finalmente deu certo.
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `html:dist`: compiles GWT sources. The compiled application can be found at `html/build/dist`: you can use any HTTP server to deploy it.
-- `html:superDev`: compiles GWT sources and runs the application in SuperDev mode. It will be available at [localhost:8080/html](http://localhost:8080/html). Use only during development.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+Sobre a programação do projeto, tive vários problemas iniciais por não ter ido nas aulas em que foi explicado de forma mais detalhada o libGDX, então na semana da JAI fiquei estagnado sem saber para onde ir, comecei pelos assets iniciais pedi ajuda para uma amiga, para fazer as coisas básicas do jogo, com a experiência dela conseguimos deixar um visual agradável, ela me ajudou com os assets de background, personagem, plataforma, andaime, parede e a tela final de parabéns. Com essa base consegui fazer uma montagem inicial para poder entregar no dia 14/11, mas deu tudo errado por conta de problemas de localização e pixels, mas consegui arrumar.
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+
+Ainda faltavam as perguntas, então decidi fazê las eu mesmo, tentei achar algum lugar que poderia fazer as perguntas para baixar a imagem, mas não tive sucesso, então tentei fazer umas gambiarras até que saiu algo minimamente apresentável, de início fiz 4 questões simples para poder fazer os primeiros testes, mas elas seguiram até o final do projeto. Obtive muitos problemas com a adaptação das perguntas para o formato do jogo, infelizmente isso é algo que ainda preciso melhorar, mesmo testando diversas alterações tanto em código como nas próprias imagens não tive sucesso, então as questões estão um pouco feias e achatadas na tela, mas funciona.
+
+
+Falando mais sobre o código e a criação das classes, foi me recomendado estudar e usar como exemplos códigos dos jogos do ano passado, eu escolhi me basear no jogo **aya adventures**, li bastante dos códigos e como eles funcionavam e a partir disso comecei fazendo o meu, tive vários problemas com pixeis para poder encaixar as imagens e as áreas de clique, e por isso tive problema com as últimas duas questões, que por algum motivo estão com local de clique muito específicos. Sobre o restante foi divertido e estressante ter que implementar funções que não tinha conhecimento, mas consegui aplicar tudo certinho.
+
+
+Este projeto ainda está incompleto, no início sugeri fazer um sistema de score para aprovar um resultado, mas no final resolvi fazer um sistema de vidas para deixar a gamificação mais simples, mas não exibe os corações na tela.
+
+
+### Diagrama de classes
+
+### Orientações para execução
+
+### Resultado final
+
+### Referências e créditos
+

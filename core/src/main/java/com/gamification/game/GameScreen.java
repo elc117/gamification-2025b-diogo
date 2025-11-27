@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
     private float targetY;
     private float targetPlataformaY;
     private float targetAndaimeY;
-    private float moveSpeed = 100f; 
+    private float moveSpeed = 150f; 
 
     public GameScreen(Main game) {
         this.game = game;
@@ -65,26 +65,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        
-        // Atualizar animação de subida
-        if (isMovingUp) {
-            float moveAmount = moveSpeed * delta;
-            
-            // Mover personagem
-            if (characterY < targetY) {
-                characterY = Math.min(characterY + moveAmount, targetY);
-            }
-            
-            // Mover plataforma
-            if (plataformaY < targetPlataformaY) {
-                plataformaY = Math.min(plataformaY + moveAmount, targetPlataformaY);
-            }
-            
-            // Verificar se chegou ao destino
-            if (characterY >= targetY && plataformaY >= targetPlataformaY && andaimeY >= targetAndaimeY) {
-                isMovingUp = false;
-            }
-        }
         
         // Processar input
         handleInput();
@@ -123,7 +103,26 @@ public class GameScreen implements Screen {
                     targetY = characterY + moveUp;
                     targetPlataformaY = plataformaY + moveUp;
                     isMovingUp = true;
-                    
+                    // Atualizar animação de subida
+                    if (isMovingUp) {
+                        float moveAmount = moveSpeed * delta;
+                        
+                        // Mover personagem
+                        if (characterY < targetY) {
+                            characterY = Math.min(characterY + moveAmount, targetY);
+                        }
+                        
+                        // Mover plataforma
+                        if (plataformaY < targetPlataformaY) {
+                            plataformaY = Math.min(plataformaY + moveAmount, targetPlataformaY);
+                        }
+                        
+                        // Verificar se chegou ao destino
+                        if (characterY >= targetY && plataformaY >= targetPlataformaY && andaimeY >= targetAndaimeY) {
+                            isMovingUp = false;
+                        }
+                    }
+
                     // Avançar para próxima pergunta (questões 0, 1, 2, 3)
                     if (currentQuestionIndex < 3) {
                         currentQuestionIndex++;
